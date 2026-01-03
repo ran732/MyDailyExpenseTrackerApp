@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import*
 
-#signup API 
+#signup API   #api
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':   # also use "delete" read="get"
