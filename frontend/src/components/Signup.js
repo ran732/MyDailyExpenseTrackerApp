@@ -1,120 +1,74 @@
-import React, { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Signup = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    FullName: "",
-    Email: "",
-    Password: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("http://127.0.0.1:8000/api/signup/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      if (response.status === 201) {
-        toast.success("SignUp successful! Please Login.");
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
-      } else {
-        const data = await response.json();
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      toast.error("Something went wrong. Try again.");
-    }
-  };
-
+function Signup() {
+  // type rfce shortcut for ..
   return (
     <div className="container mt-5">
       <div className="text-center mb-4">
         <h2>
-          <i className="fas fa-user-plus me-2"></i>Sign Up
+          <i className=" fas fa-user-plus me-2"></i>Signup
         </h2>
-        <p className="text-primary">
-          Create your account to start tracking expances
+        <p className="text-primary pb-4">
+          Create your account to start your tracking your expense
         </p>
       </div>
 
       <form
-        className="p-4 border shadow rounded mx-auto"
+        className="p-4 border rounded shadow mx-auto"
         style={{ maxWidth: "400px" }}
-        onSubmit={handleSubmit}
       >
-        <div className="mb-3">
-          <label className="form-label">Full Name</label>
+        <div className="">
+          <label className="form-lebel ps-2"> Full Name</label>
           <div className="input-group">
             <span className="input-group-text">
               <i className="fas fa-user"></i>
             </span>
             <input
-              type="text"
-              name="FullName"
-              value={formData.FullName}
               className="form-control"
-              onChange={handleChange}
-              required
+              name="FullName"
+              type="text"
               placeholder="Enter your full name"
+              required
             />
           </div>
         </div>
-
-        <div className="mb-3">
-          <label className="form-label">Email</label>
+        <div className="mt-3">
+          <label className="form-lebel ps-2"> Email</label>
           <div className="input-group">
             <span className="input-group-text">
               <i className="fas fa-envelope"></i>
             </span>
             <input
-              type="email"
-              name="Email"
-              value={formData.Email}
               className="form-control"
-              onChange={handleChange}
-              required
+              name="Email"
+              type="email"
               placeholder="Enter your email"
+              required
             />
           </div>
         </div>
-
-        <div className="">
-          <label className="form-label">Password</label>
+        <div className="mt-3">
+          <label className="form-lebel ps-2"> Password</label>
           <div className="input-group">
             <span className="input-group-text">
               <i className="fas fa-lock"></i>
             </span>
             <input
-              type="password"
-              name="Password"
-              value={formData.Password}
               className="form-control"
-              onChange={handleChange}
-              required
+              name="Password"
+              type="password"
               placeholder="Create your password"
+              required
             />
           </div>
         </div>
-
-        <button type="submit" className="btn btn-primary w-100 mt-4">
-          <i className="fas fa-user-plus me-3"></i>SignUp
-        </button>
+        <button type="submit" className="btn btn-primary mt-4 w-100"><i className="fas fa-user-plus pe-1"></i> Signup</button>
       </form>
-      <ToastContainer />
+      <ToastContainer/>
     </div>
   );
-};
+}
 
 export default Signup;
